@@ -1,0 +1,14 @@
+name: Party
+version: '1.0.0'
+main: com.darkun7.party.PartyPlugin
+api-version: '1.21'
+description: A standalone Party system for RuneMobs, Jobs, and chat prefixes.
+authors: [darkun7]
+
+commands:
+  party:
+    description: Main party command (create, invite, join, leave, list)
+    aliases: [p]
+  partychat:
+    description: Speak exclusively to your party members
+    aliases: [pc]
