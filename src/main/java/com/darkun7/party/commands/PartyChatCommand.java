@@ -21,14 +21,16 @@ public class PartyChatCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Usage: /pc <message>");
-            return true;
-        }
-
         Party p = plugin.getPartyManager().getParty(player.getUniqueId());
         if (p == null) {
             player.sendMessage(ChatColor.RED + "You are not in a party. You cannot use party chat.");
+            return true;
+        }
+
+        if (args.length == 0) {
+            plugin.getChatModeManager().togglePartyChatMode(player.getUniqueId());
+            boolean enabled = plugin.getChatModeManager().isInPartyChatMode(player.getUniqueId());
+            player.sendMessage(ChatColor.GREEN + "Party chat mode " + (enabled ? "enabled" : "disabled") + ".");
             return true;
         }
 

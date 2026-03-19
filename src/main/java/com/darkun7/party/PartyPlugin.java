@@ -9,6 +9,7 @@ public class PartyPlugin extends JavaPlugin {
     private PartyManager partyManager;
     private com.darkun7.party.managers.TrackerManager trackerManager;
     private com.darkun7.party.gui.PartyGUI partyGUI;
+    private com.darkun7.party.managers.ChatModeManager chatModeManager;
 
     @Override
     public void onEnable() {
@@ -16,10 +17,12 @@ public class PartyPlugin extends JavaPlugin {
         this.partyManager = new PartyManager(this);
         this.trackerManager = new com.darkun7.party.managers.TrackerManager(this);
         this.partyGUI = new com.darkun7.party.gui.PartyGUI(this);
+        this.chatModeManager = new com.darkun7.party.managers.ChatModeManager();
 
         this.partyManager.loadParties();
 
         getServer().getPluginManager().registerEvents(this.partyGUI, this);
+        getServer().getPluginManager().registerEvents(new com.darkun7.party.listeners.PartyChatListener(this), this);
 
         getCommand("party").setExecutor(new com.darkun7.party.commands.PartyCommand(this));
         getCommand("partychat").setExecutor(new com.darkun7.party.commands.PartyChatCommand(this));
@@ -48,5 +51,9 @@ public class PartyPlugin extends JavaPlugin {
 
     public com.darkun7.party.gui.PartyGUI getPartyGUI() {
         return partyGUI;
+    }
+
+    public com.darkun7.party.managers.ChatModeManager getChatModeManager() {
+        return chatModeManager;
     }
 }
